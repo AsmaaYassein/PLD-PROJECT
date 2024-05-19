@@ -1,0 +1,95 @@
+"Start Symbol"=<program>
+
+id={letter}
+digit={digit}
+
+
+<program>::= <concept>
+          | <concept><program>
+
+<concept>::=<assign>
+             |<ifSTAT>
+             |<loopSTAT>
+             |<funSTAT><concept>
+
+
+<assign>::=<id>'='<expr>
+
+<id>::=id
+
+<expr>::=<expr>'+'<term>
+          |<expr>'-'<term>
+          |<term>
+
+<term>::= <term>'*'<factor>
+          |<term>'/'<factor>
+          |<term>'%'<factor>
+          |<factor>
+
+<factor>::=<factor>'**'<exp>  
+            |<exp>
+
+<exp>::='('<expr>')'
+         |id
+         |digit 
+
+<digit>::=digit
+        
+
+<ifSTAT> ::= if '(' <cond> ')' ':-' <rest> 
+             |if '(' <cond> ')' ':-' <rest> else <rest> 
+   
+
+<cond>::=<expr><op><expr>
+
+<op>::='<'
+     |'>'
+     |'=='
+     |'!='
+
+
+<loopSTAT>::=<forSTAT>|<whileSTAT>|<dowhileSTAT>
+
+<forSTAT> ::= for '(' <assign> ',' <cond> ',' <step> ')' '{' <rest> '}'
+
+<step> ::= '--'<id>
+           |<id>'--'
+           |'++'<id>
+           |<id>'++'
+           |<assign>
+
+
+<whileSTAT> ::= while '(' <cond> ')' '{' <rest> '}'
+             
+<doWhileSTAT> ::= do '{' <rest> '}' while '(' <cond> ')'
+
+
+<funSTAT> ::= 'def' <id> '(' <parameters> ')' '{' <rest> '}'
+
+<parameters> ::= <id>
+               | <parameters> ',' <id>
+
+<rest> ::= <statement>
+         | <statement> <rest>
+
+<statement> ::= <concept>
+              | <returnSTAT>
+              | <funSTAT>
+
+<returnSTAT> ::= 'return' <expr>
+
+<funcallSTAT> ::= <id> '(' <arguments> ')'
+
+<arguments> ::= <expr>
+              | <arguments> ',' <expr>
+
+
+
+
+
+
+
+
+
+
+
